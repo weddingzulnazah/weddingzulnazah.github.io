@@ -79,7 +79,8 @@
 	<link rel="stylesheet" type="text/css" href="https://skylightanimation.github.io/assets/plugin/font-awesome/4.7.0/css/font-awesome.css">
 	<script type="text/javascript" src="https://skylightanimation.github.io/assets/plugin/jquery/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="https://skylightanimation.github.io/assets/plugin/bootstrap/3.3.7/bootstrap.min.js"></script>
-
+	<!-- Sweet alernt-->
+	<script src="js/sweetalert2.all.js"></script>
 </head>
 <body>
 
@@ -471,6 +472,9 @@
 							</select>
 						</div>
 						<button type="submit" class="btn btn-primary">Kirim Pesan</button>
+						<script >
+
+						</script>
 					</form>
 				</div>
 				<div class="row animate-box">
@@ -836,11 +840,24 @@
 	  e.preventDefault()
 	  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
 		.then(response => {
+			//notif sukses
+			Swal.fire(
+				'Terimakasih',
+				'Pesan anda sudah terkirim',
+				'success'
+				)
 			//reset form
 			form.reset();
 			console.log('Success!', response);
 		})
-		.catch(error => console.error('Error!', error.message))
+		.catch(error => {
+			Swal.fire(
+				'Connection Lost',
+				'Pesan anda gagal terkirim, mohon cek kembali koneksi anda',
+				'warning'
+				)			
+			console.error('Error!', error.message)
+		} )
 	})
 </script>
 
